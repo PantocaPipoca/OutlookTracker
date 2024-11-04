@@ -14,10 +14,10 @@ Are you often wondering where your time went? Whether it's work, studying, or ga
 ## 🚀 Features
 The following list shows the project's feature roadmap. Completed features are marked as ~crossed out~ (Feature list is not ordered in any way):
 
-- [x] **Microsoft Authentication**: Secure login using Microsoft OAuth and Graph API.
-- [x] **Calendar Event Logging**: Automatically logs categorized activities in Outlook Calendar.
-- [x] **Active Window Tracking**: Tracks active apps and categorizes activities.
-- [x] **Dynamic Event Updates**: Logs time spent on activities by updating calendar entries.
+- [x] **~Microsoft Authentication~**: Secure login using Microsoft OAuth and Graph API.
+- [x] **~Calendar Event Logging~**: Automatically logs categorized activities in Outlook Calendar.
+- [x] **~Active Window Tracking~**: Tracks active apps and categorizes activities.
+- [x] **~Dynamic Event Updates~**: Logs time spent on activities by updating calendar entries.
 - [ ] **Custom User Interface**: Easy-to-use GUI for managing settings and tracking.
 - [ ] **Monthly Statistics Generation**: Visualize monthly activities with time charts.
 - [ ] **Multi-Device Tracking**: Expands tracking to mobile and tablets.
