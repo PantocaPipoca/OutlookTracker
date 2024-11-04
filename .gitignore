@@ -166,3 +166,4 @@ cython_debug/
 # Personal
 config.json
 token_cache.json
+data.json

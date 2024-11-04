@@ -12,28 +12,28 @@ Are you often wondering where your time went? Whether it's work, studying, or ga
 ---
 
 ## 🚀 Features
-The following list shows the project's feature roadmap. Completed features are marked as ~crossed out~ (Feature list is not ordered in any way):
+The following list shows the project's feature roadmap. Completed features are marked as ~crossed out~:
 
 - [x] **~Microsoft Authentication~**: Secure login using Microsoft OAuth and Graph API.
 - [x] **~Calendar Event Logging~**: Automatically logs categorized activities in Outlook Calendar.
 - [x] **~Active Window Tracking~**: Tracks active apps and categorizes activities.
 - [x] **~Dynamic Event Updates~**: Logs time spent on activities by updating calendar entries.
-- [ ] **Custom User Interface**: Easy-to-use GUI for managing settings and tracking.
-- [ ] **Monthly Statistics Generation**: Visualize monthly activities with time charts.
-- [ ] **Multi-Device Tracking**: Expands tracking to mobile and tablets.
-- [ ] **Cross-Platform Compatibility**: Support for iOS and Linux.
-- [ ] **Enhanced Activity Categorization**: Add custom categories (e.g., reading, exercise).
 - [ ] **Background Execution**: Runs in the background for continuous tracking.
-- [ ] **User Notification System**: Alerts for authentication, tracking, and actions.
 - [ ] **Configurable Settings**: Allows customization of intervals and categories.
+- [ ] **Custom User Interface**: Easy-to-use GUI for managing settings and tracking.
 - [ ] **Location-Based Tracking**: Logs activities with location context.
+- [ ] **Enhanced Activity Categorization**: Add custom categories (e.g., reading, exercise).
+- [ ] **Cross-Platform Compatibility**: Support for iOS and Linux.
+- [ ] **Monthly Statistics Generation**: Visualize monthly activities with time charts.
+- [ ] **Customizable GUI Themes**: Offers light, dark, and other GUI themes.
+
+- [ ] **User Notification System**: Alerts for authentication, tracking, and actions.
 - [ ] **Automated Report Generation**: Export weekly/monthly summaries as downloadable reports.
 - [ ] **Goal Setting**: Track progress with time-based activity goals.
 - [ ] **Productivity Insights**: Provides insights on time usage patterns.
 - [ ] **Smart Alerts**: Alerts for extended activities, like screen time breaks.
 - [ ] **Data Backup and Sync**: Backup and sync data across devices.
 - [ ] **Offline Mode**: Tracks offline, syncing when connected.
-- [ ] **Customizable GUI Themes**: Offers light, dark, and other GUI themes.
 - [ ] **Data Privacy Controls**: Lets users review, manage, and delete activity logs.
 
 ---

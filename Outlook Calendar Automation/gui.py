@@ -3,15 +3,12 @@ import tkinter as tk
 from tkinter import messagebox
 from logic import start_tracking
 from HelperFunctions import load_config, save_config
+import threading
 
 ##################--------Get USER_ID--------##################
 
 config = load_config()
 USER_ID = config.get("USER_ID", "default_user_id@example.com")
-
-def on_start_button_click():
-    start_tracking()
-    messagebox.showinfo("Info", "Tracking started")
 
 def on_save_button_click(entry):
     global USER_ID
@@ -19,6 +16,16 @@ def on_save_button_click(entry):
     config["USER_ID"] = USER_ID
     save_config(config)
     messagebox.showinfo("Info", "User ID saved")
+
+##################--------Start Tracking--------##################
+
+def on_start_button_click():
+    tracking_thread = threading.Thread(target=start_tracking)
+    tracking_thread.daemon = True  # This ensures the thread will close when the main program exits
+    tracking_thread.start()
+    messagebox.showinfo("Info", "Tracking started")
+
+##################--------Create GUI--------##################
 
 def create_gui():
     root = tk.Tk()

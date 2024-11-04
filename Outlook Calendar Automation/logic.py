@@ -58,6 +58,8 @@ def GetActiveWindow():
             return window.title, "Process no longer exists"
     return None, None
 
+####################--------Usage Tracker--------####################
+
 def TrackAndLogUsage(token: str, windowCheckDelay: int, eventUpdateDelay: int, intervalDuration: int):
     lastActiveWindow = None  # Last active window for a moment
     startTime = None  # Start time of the current window

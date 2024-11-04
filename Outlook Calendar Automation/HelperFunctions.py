@@ -6,6 +6,7 @@ import pygetwindow as gw
 import psutil
 import ctypes
 import json
+from datetime import datetime, timedelta
 
 ####################--------Application Dictionary--------####################
 
@@ -127,9 +128,27 @@ def GetActiveWindow():
 ##################--------Json Handler--------##################
 
 def load_config():
-    with open("config.json", "r") as f:
-        return json.load(f)
+    try:
+        with open("config.json", "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
 
 def save_config(config):
     with open("config.json", "w") as f:
         json.dump(config, f, indent=4)
+
+def saveEventToDataFile(subject, startTime, endTime): 
+    try:
+        with open("data.json", "r") as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        data = []
+
+    data.append({"subject": subject, "startTime": startTime, "endTime": endTime})
+
+    with open("data.json", "w") as f:
+        json.dump(data, f, indent=4)
+
+if __name__ == "__main__":
+    saveEventToDataFile("Test Event", datetime.now().isoformat(), (datetime.now() + timedelta(hours=1)).isoformat())
