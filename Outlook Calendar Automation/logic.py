@@ -15,6 +15,7 @@ CLIENT_ID = os.environ.get("OutlookAutom_CLIENT")
 TENANT_ID = "common"
 CLIENT_SECRET = os.environ.get("OutlookAutom_SECRET")
 SCOPE = ["https://graph.microsoft.com/calendars.readwrite"]
+USER_ID = hf.getUserId()
 
 ####################--------Event Handler--------####################
 
@@ -60,7 +61,7 @@ def GetActiveWindow():
 
 ####################--------Usage Tracker--------####################
 
-def TrackAndLogUsage(token: str, windowCheckDelay: int, eventUpdateDelay: int, intervalDuration: int):
+def TrackAndLogUsage(token: str, windowCheckDelay: int, eventUpdateDelay: int, intervalDuration: int, stop_event):
     lastActiveWindow = None  # Last active window for a moment
     startTime = None  # Start time of the current window
 
@@ -72,6 +73,9 @@ def TrackAndLogUsage(token: str, windowCheckDelay: int, eventUpdateDelay: int, i
     combinedEndTime = None
 
     while True:
+        if stop_event.is_set():
+            break
+
         time.sleep(windowCheckDelay)  # Time between window checks
         currentActiveWindow, currentActiveProcess = GetActiveWindow()
 
@@ -171,10 +175,10 @@ def LoadTokenCache():
 
 ####################--------Main Function--------####################
 
-def start_tracking():
+def startTracking(stop_event):
     token = GetAccessToken()
     windowCheckDelay = 1
     eventUpdateDelay = 1
     intervalDuration = timedelta(minutes=15)
     if timedelta(seconds=eventUpdateDelay) < intervalDuration:
-        TrackAndLogUsage(token, windowCheckDelay, eventUpdateDelay, intervalDuration)
+        TrackAndLogUsage(token, windowCheckDelay, eventUpdateDelay, intervalDuration, stop_event)

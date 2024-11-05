@@ -127,16 +127,23 @@ def GetActiveWindow():
 
 ##################--------Json Handler--------##################
 
-def load_config():
+def loadConfig():
     try:
         with open("config.json", "r") as f:
             return json.load(f)
     except FileNotFoundError:
         return {}
 
-def save_config(config):
+def saveConfig(config):
     with open("config.json", "w") as f:
         json.dump(config, f, indent=4)
+
+def getUserId():
+    config = loadConfig()
+    if config:
+        return config.get("USER_ID", "exemple@outlook.com")
+    else:
+        return "exemple@outlook.com"
 
 def saveEventToDataFile(subject, startTime, endTime): 
     try:

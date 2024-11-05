@@ -1,45 +1,63 @@
 ####################--------Imports--------####################
 import tkinter as tk
-from tkinter import messagebox
-from logic import start_tracking
-from HelperFunctions import load_config, save_config
+from tkinter import messagebox, ttk
+from logic import startTracking
+from HelperFunctions import loadConfig, saveConfig, getUserId
 import threading
 
-##################--------Get USER_ID--------##################
+isTracking = threading.Event()
+trackingActive = False
+trackingThread = None
 
-config = load_config()
-USER_ID = config.get("USER_ID", "default_user_id@example.com")
+def startTrackingButton(userId):
+    global trackingActive, trackingThread
+    saveConfig({"USER_ID": userId})
+    if trackingActive:
+        statusVar.set("Status: Tracking Already Started")
+        return
+    if trackingThread is None or not trackingThread.is_alive():
+        isTracking.clear()
+        trackingThread = threading.Thread(target=lambda: startTracking(isTracking))
+        trackingThread.daemon = True
+        trackingThread.start()
+        trackingActive = True
+        statusVar.set("Status: Tracking Started")
 
-def on_save_button_click(entry):
-    global USER_ID
-    USER_ID = entry.get()
-    config["USER_ID"] = USER_ID
-    save_config(config)
-    messagebox.showinfo("Info", "User ID saved")
-
-##################--------Start Tracking--------##################
-
-def on_start_button_click():
-    tracking_thread = threading.Thread(target=start_tracking)
-    tracking_thread.daemon = True  # This ensures the thread will close when the main program exits
-    tracking_thread.start()
-    messagebox.showinfo("Info", "Tracking started")
+def stopTrackingButton():
+    global trackingActive
+    if not trackingActive:
+        statusVar.set("Status: Tracking Already Stopped")
+        return
+    isTracking.set()
+    trackingActive = False
+    statusVar.set("Status: Tracking Stopped")
 
 ##################--------Create GUI--------##################
 
-def create_gui():
+def createGUI():
     root = tk.Tk()
-    root.title("Outlook Calendar Automation")
+    root.title("Activity Tracker")
 
-    tk.Label(root, text="User ID:").pack(pady=5)
-    user_id_entry = tk.Entry(root)
-    user_id_entry.pack(pady=5)
-    user_id_entry.insert(0, USER_ID)
+    user_id_label = ttk.Label(root, text="User ID:")
+    user_id_label.grid(row=0, column=0, padx=5, pady=5)
 
-    save_button = tk.Button(root, text="Save User ID", command=lambda: on_save_button_click(user_id_entry))
-    save_button.pack(pady=5)
+    user_id_entry = ttk.Entry(root, width=30)
+    user_id_entry.insert(0, getUserId())
+    user_id_entry.grid(row=0, column=1, padx=5, pady=5)
 
-    start_button = tk.Button(root, text="Start Tracking", command=on_start_button_click)
-    start_button.pack(pady=20)
+    start_button = ttk.Button(root, text="Start", command=lambda: startTrackingButton(user_id_entry.get()))
+    start_button.grid(row=0, column=2, padx=5, pady=5)
+
+    global statusVar
+    statusVar = tk.StringVar()
+    statusVar.set("Status: Inactive")
+    status_label = ttk.Label(root, textvariable=statusVar)
+    status_label.grid(row=1, column=0, columnspan=3, padx=5, pady=5)
+
+    stop_button = ttk.Button(root, text="Stop", command=stopTrackingButton)
+    stop_button.grid(row=2, column=2, padx=5, pady=5)
 
     root.mainloop()
+
+if __name__ == "__main__":
+    createGUI()
